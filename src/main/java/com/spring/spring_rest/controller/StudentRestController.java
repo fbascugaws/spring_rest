@@ -1,6 +1,7 @@
 package com.spring.spring_rest.controller;
 
 import com.spring.spring_rest.entity.Student;
+import com.spring.spring_rest.exception.StudentNotFoundException;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,12 @@ public class StudentRestController {
 
     @GetMapping("/students/{studentId}")
     public Student getMethodName(@PathVariable int studentId) {
+        
+        if (studentId >= theStudents.size() || studentId < 0) {
+            throw new StudentNotFoundException(
+                "Student id " + studentId + " not found!");
+        }
+
         return theStudents.get(studentId);
     }
     

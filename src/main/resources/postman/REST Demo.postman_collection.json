@@ -1,0 +1,58 @@
+{
+  "info": {
+    "_postman_id": "43bdaa0b-2c00-49c2-a2ee-2d85bdcde3ea",
+    "name": "REST Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58837986",
+    "_collection_link": "https://go.postman.co/collection/58837986-43bdaa0b-2c00-49c2-a2ee-2d85bdcde3ea?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "sample_request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "students",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "student_id",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "invalid_student_id",
+          "originalRequest": {
+            "method": "GET",
+            "header": []
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "invalid_student_id_string",
+          "originalRequest": {
+            "method": "GET",
+            "header": []
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    }
+  ]
+}
