@@ -1,54 +1,46 @@
 package com.spring.spring_rest.controller;
 
-import com.spring.spring_rest.entity.Student;
-import com.spring.spring_rest.exception.StudentNotFoundException;
-import jakarta.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.spring.spring_rest.dto.StudentDto;
+import com.spring.spring_rest.service.StudentService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * StudentRestController
+ * 
+ * TODO desc
+ * 
+ * @author Felisa Bascug
  */
 @RestController 
-@RequestMapping ("/api")
+@RequestMapping ("/api/students")
 public class StudentRestController {
 
-    private List<Student> theStudents;
+    private StudentService studentService;
 
-
-    @PostConstruct 
-    public void initialize() {
-        theStudents = new ArrayList<>();
-
-        theStudents.add(new Student("Chiaki", "Nanami"));
-        theStudents.add(new Student("Hajime", "Hinata"));
-        theStudents.add(new Student("Nagito", "Komaeda"));
-
+    public StudentRestController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-
-    @GetMapping("/students")
-    public List<Student> getStudents() {
-        return theStudents;
-    }
-
-
-    @GetMapping("/students/{studentId}")
-    public Student getMethodName(@PathVariable int studentId) {
+    /**
+     * TODO add desc
+     * 
+     * @param studentDto JSON payload which is converted into StudentDto
+     * @return the ReponseEntity including student data and HTTP status
+     */
+    @PostMapping
+    public ResponseEntity<StudentDto> createStudents(
+            @RequestBody StudentDto studentDto) {
         
-        if (studentId >= theStudents.size() || studentId < 0) {
-            throw new StudentNotFoundException(
-                "Student id " + studentId + " not found!");
-        }
-
-        return theStudents.get(studentId);
+        StudentDto saved = studentService.createStudent(studentDto);
+        
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
+    
     
 
 }
