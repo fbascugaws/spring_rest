@@ -62,4 +62,25 @@ public class StudentServiceImplement implements StudentService {
             .collect(Collectors.toList());
     }
 
+    /**   
+     * 
+     * @param id
+     * @param studentDto
+     * @return
+     */
+    @Override
+    public StudentDto updateStudent(Long id, StudentDto studentDto) {
+        
+        Student student = studentRepo.findById(id)
+            .orElseThrow(() -> new StudentNotFoundException(
+                "Student id " + id + " not found!"));
+
+        student.setFirstName(studentDto.getFirstName());
+        student.setLastName(studentDto.getLastName());
+        student.setEmail(studentDto.getEmail());
+
+        Student saved = studentRepo.save(student);
+        return StudentMapper.mapToStudentDto(saved);
+    }
+
 }
