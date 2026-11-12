@@ -42,7 +42,7 @@ public class StudentServiceImplement implements StudentService {
         
         Student student = studentRepo.findById(id)
             .orElseThrow(() -> new StudentNotFoundException(
-                "Student id " + id + " not found!"));
+                getStudentNotFoundMessage(id)));
         
         return StudentMapper.mapToStudentDto(student);
     }
@@ -73,7 +73,7 @@ public class StudentServiceImplement implements StudentService {
         
         Student student = studentRepo.findById(id)
             .orElseThrow(() -> new StudentNotFoundException(
-                "Student id " + id + " not found!"));
+                getStudentNotFoundMessage(id)));
 
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
@@ -88,7 +88,7 @@ public class StudentServiceImplement implements StudentService {
         
         Student student = studentRepo.findById(id)
             .orElseThrow(() -> new StudentNotFoundException(
-                "Student id " + id + " not found!"));
+                getStudentNotFoundMessage(id)));
 
         if (studentDto.getFirstName() != null) {
             student.setFirstName(studentDto.getFirstName());
@@ -101,7 +101,29 @@ public class StudentServiceImplement implements StudentService {
         }
 
         Student saved = studentRepo.save(student);
-        return StudentMapper.mapToStudentDto(student);
+        return StudentMapper.mapToStudentDto(saved);
+    }
+
+
+    @Override
+    public void deleteStudentById(Long id) {
+
+        studentRepo.findById(id)
+            .orElseThrow(() -> new StudentNotFoundException(
+                getStudentNotFoundMessage(id)));
+
+        studentRepo.deleteById(id);
+    }
+
+    /**
+     * Helper method to return the error message when the requested student
+     * cannot be found in the database.
+     * 
+     * @param id student id
+     * @return "Student id {id} not found!" error message
+     */
+    private String getStudentNotFoundMessage(Long id) {
+        return "Student id " + id + " not found!";
     }
 
 }
