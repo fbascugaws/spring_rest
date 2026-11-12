@@ -5,5 +5,6 @@ import com.spring.spring_rest.dto.StudentDto;
 public interface StudentService {
 
     StudentDto createStudent(StudentDto studentDto);
+    StudentDto getStudentById(Long id);
 
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.spring_rest.dto.StudentDto;
 import com.spring.spring_rest.entity.Student;
+import com.spring.spring_rest.exception.StudentNotFoundException;
 import com.spring.spring_rest.mapper.StudentMapper;
 import com.spring.spring_rest.repository.StudentRepository;
 
@@ -32,6 +33,17 @@ public class StudentServiceImplement implements StudentService {
         Student saved = studentRepo.save(student);
         
         return StudentMapper.mapToStudentDto(saved);
+    }
+
+
+    @Override
+    public StudentDto getStudentById(Long id) {
+        
+        Student student = studentRepo.findById(id)
+            .orElseThrow(() -> new StudentNotFoundException
+                ("Student id " + id + " not found!"));
+        
+        return StudentMapper.mapToStudentDto(student);
     }
 
 }
