@@ -2,6 +2,12 @@ package com.spring.spring_rest.exception;
 
 /**
  * StudentNotFoundException
+ * <p>
+ * Custom runtime exception thrown when a requested student record cannot be 
+ * found in the system.
+ * </p>
+ * 
+ * @author Felisa Bascug
  */
 public class StudentNotFoundException extends RuntimeException {
 
@@ -18,7 +24,5 @@ public class StudentNotFoundException extends RuntimeException {
     public StudentNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-
-    
 
 }

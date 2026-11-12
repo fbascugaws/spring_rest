@@ -5,20 +5,20 @@ import com.spring.spring_rest.entity.Student;
 
 /**
  * StudentMapper
- * 
- * Contains methods that map the StudentDto to Student and vice versa.
- * Automates the tedious process of moving data between an entity and DTO 
- * rather than writing manually boilerplate code.
+ * <p>
+ * Utility class responsible for mapping between {@link Student} JPA entities
+ * and {@link StudentDto} data transfer objects.
+ * </p>
  * 
  * @author Felisa Bascug
  */
 public class StudentMapper {
 
     /**
-     * Maps a Student object to a StudentDto object.
-     * 
-     * @param student
-     * @return mapped StudentDto object
+     * Converts a {@link Student} entity into a {@link StudentDto}.
+     *
+     * @param student the {@link Student} entity to convert
+     * @return the mapped {@link StudentDto} containing the student's details
      */
     public static StudentDto mapToStudentDto(Student student) {
         return new StudentDto(student.getId(), student.getFirstName(), 
@@ -26,10 +26,10 @@ public class StudentMapper {
     }
 
     /**
-     * Maps a StudentDto object to a Student object.
-     * 
-     * @param studentDto
-     * @return mapped Student object
+     * Converts a {@link StudentDto} into a {@link Student} entity.
+     *
+     * @param studentDto the {@link StudentDto} to convert
+     * @return the mapped {@link Student} entity containing the DTO's details
      */
     public static Student mapToStudent(StudentDto studentDto) {
         return new Student(studentDto.getId(), studentDto.getFirstName(), 

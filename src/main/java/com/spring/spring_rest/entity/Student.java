@@ -9,8 +9,10 @@ import jakarta.persistence.Table;
 
 /**
  * Student
- * 
- * TODO
+ * <p>
+ * JPA entity representing a student record mapped to the {@code student} 
+ * database table. Stores basic personal and contact information for a student.
+ * </p>
  * 
  * @author Felisa Bascug
  */

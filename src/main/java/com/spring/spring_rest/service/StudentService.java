@@ -3,6 +3,12 @@ package com.spring.spring_rest.service;
 import com.spring.spring_rest.dto.StudentDto;
 import java.util.List;
 
+/**
+ * StudentService
+ * Service interface defining business operations for managing student records.
+ * 
+ * @author Felisa Bascug
+ */
 public interface StudentService {
 
     StudentDto createStudent(StudentDto studentDto);

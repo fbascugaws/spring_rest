@@ -11,8 +11,13 @@ import java.util.stream.Collectors;
 
 /**
  * StudentServiceImplement
+ * <p>
+ * Implementation of the {@link StudentService} interface.
+ * Handles business logic, DTO-to-entity mapping, and persistence operations
+ * for student records via {@link StudentRepository}.
+ * </p>
  * 
- * TODO
+ * @author Felisa Bascug
  */
 @Service 
 public class StudentServiceImplement implements StudentService {
@@ -23,10 +28,12 @@ public class StudentServiceImplement implements StudentService {
         this.studentRepo = studentRepo;
     }
 
-    /**    
-     * TODO
-     * 
-     * @return 
+    /**
+     * Persists a new student record in the database.
+     *
+     * @param studentDto the {@link StudentDto} containing the details of the 
+     *                      student to create
+     * @return the saved {@link StudentDto} with its generated identifier
      */
     @Override
     public StudentDto createStudent(StudentDto studentDto) {
@@ -36,7 +43,13 @@ public class StudentServiceImplement implements StudentService {
         return StudentMapper.mapToStudentDto(saved);
     }
 
-
+    /**
+     * Retrieves a single student record by its unique identifier.
+     *
+     * @param id the unique identifier of the student to retrieve
+     * @return the matching {@link StudentDto}
+     * @throws StudentNotFoundException if no student exists with the given ID
+     */
     @Override
     public StudentDto getStudentById(Long id) {
         
@@ -47,10 +60,11 @@ public class StudentServiceImplement implements StudentService {
         return StudentMapper.mapToStudentDto(student);
     }
 
-    /**   
-     * Retrieves all Student entities from the database.
-     * 
-     * @return a list of all students in the database
+    /**
+     * Retrieves all student records from the database.
+     *
+     * @return a {@link List} of {@link StudentDto} objects representing all 
+     *          students
      */
     @Override
     public List<StudentDto> getAllStudents() {
@@ -62,11 +76,14 @@ public class StudentServiceImplement implements StudentService {
             .collect(Collectors.toList());
     }
 
-    /**   
-     * 
-     * @param id
-     * @param studentDto
-     * @return
+    /**
+     * Fully updates an existing student record with new details.
+     *
+     * @param id         the unique identifier of the student to update
+     * @param studentDto the {@link StudentDto} containing the updated student
+     *                      fields
+     * @return the updated {@link StudentDto}
+     * @throws StudentNotFoundException if no student exists with the given ID
      */
     @Override
     public StudentDto updateStudent(Long id, StudentDto studentDto) {
@@ -83,6 +100,15 @@ public class StudentServiceImplement implements StudentService {
         return StudentMapper.mapToStudentDto(saved);
     }
 
+    /**
+     * Partially updates an existing student record using only non-null fields
+     * from the provided DTO.
+     *
+     * @param id         the unique identifier of the student to patch
+     * @param studentDto the {@link StudentDto} containing the fields to update
+     * @return the patched {@link StudentDto}
+     * @throws StudentNotFoundException if no student exists with the given ID
+     */
     @Override
     public StudentDto patchStudent(Long id, StudentDto studentDto) {
         
@@ -104,7 +130,12 @@ public class StudentServiceImplement implements StudentService {
         return StudentMapper.mapToStudentDto(saved);
     }
 
-
+    /**
+     * Deletes an existing student record by its unique identifier.
+     *
+     * @param id the unique identifier of the student to delete
+     * @throws StudentNotFoundException if no student exists with the given ID
+     */
     @Override
     public void deleteStudentById(Long id) {
 
@@ -116,11 +147,12 @@ public class StudentServiceImplement implements StudentService {
     }
 
     /**
-     * Helper method to return the error message when the requested student
+     * Helper method to format the error message when a requested student
      * cannot be found in the database.
-     * 
-     * @param id student id
-     * @return "Student id {id} not found!" error message
+     *
+     * @param id the student ID that was not found
+     * @return a formatted error message string 
+     *          (e.g., {@code "Student id {id} not found!"})
      */
     private String getStudentNotFoundMessage(Long id) {
         return "Student id " + id + " not found!";

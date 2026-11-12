@@ -5,10 +5,11 @@ import jakarta.validation.constraints.Size;
 
 /**
  * StudentDto
- * 
+ * <p>
  * Acts as a container for data that can be passed between different parts
  * of an application, or over a network.
  * The DTO (Data Transfer Object) acts as a protective shield and filter.
+ * </p>
  * 
  * @author Felisa Bascug
  */

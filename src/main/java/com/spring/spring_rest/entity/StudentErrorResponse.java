@@ -2,6 +2,12 @@ package com.spring.spring_rest.entity;
 
 /**
  * StudentErrorResponse
+ * <p>
+ * Data model representing a standardized error response returned by REST 
+ * endpoints when an exception occurs during student request processing.
+ * </p>
+ * 
+ * @author Felisa Bascug
  */
 public class StudentErrorResponse {
     private int status;
@@ -46,7 +52,5 @@ public class StudentErrorResponse {
         return "StudentErrorResponse [status=" + status 
             + ", message=" + message + ", timeStamp=" + timeStamp + "]";
     }
-
-    
 
 }
