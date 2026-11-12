@@ -1,12 +1,13 @@
 package com.spring.spring_rest.service;
 
-import org.springframework.stereotype.Service;
-
 import com.spring.spring_rest.dto.StudentDto;
 import com.spring.spring_rest.entity.Student;
 import com.spring.spring_rest.exception.StudentNotFoundException;
 import com.spring.spring_rest.mapper.StudentMapper;
 import com.spring.spring_rest.repository.StudentRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * StudentServiceImplement
@@ -44,6 +45,21 @@ public class StudentServiceImplement implements StudentService {
                 ("Student id " + id + " not found!"));
         
         return StudentMapper.mapToStudentDto(student);
+    }
+
+    /**   
+     * Retrieves all Student entities from the database.
+     * 
+     * @return a list of all students in the database
+     */
+    @Override
+    public List<StudentDto> getAllStudents() {
+
+        List<Student> students = studentRepo.findAll();
+
+        return students.stream().map(
+            (student) -> StudentMapper.mapToStudentDto(student))
+            .collect(Collectors.toList());
     }
 
 }
