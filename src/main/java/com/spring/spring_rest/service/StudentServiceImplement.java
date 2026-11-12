@@ -41,8 +41,8 @@ public class StudentServiceImplement implements StudentService {
     public StudentDto getStudentById(Long id) {
         
         Student student = studentRepo.findById(id)
-            .orElseThrow(() -> new StudentNotFoundException
-                ("Student id " + id + " not found!"));
+            .orElseThrow(() -> new StudentNotFoundException(
+                "Student id " + id + " not found!"));
         
         return StudentMapper.mapToStudentDto(student);
     }
@@ -81,6 +81,27 @@ public class StudentServiceImplement implements StudentService {
 
         Student saved = studentRepo.save(student);
         return StudentMapper.mapToStudentDto(saved);
+    }
+
+    @Override
+    public StudentDto patchStudent(Long id, StudentDto studentDto) {
+        
+        Student student = studentRepo.findById(id)
+            .orElseThrow(() -> new StudentNotFoundException(
+                "Student id " + id + " not found!"));
+
+        if (studentDto.getFirstName() != null) {
+            student.setFirstName(studentDto.getFirstName());
+        }
+        if (studentDto.getLastName() != null) {
+            student.setLastName(studentDto.getLastName());
+        }
+        if (studentDto.getEmail() != null) {
+            student.setEmail(studentDto.getEmail());
+        }
+
+        Student saved = studentRepo.save(student);
+        return StudentMapper.mapToStudentDto(student);
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,6 +80,16 @@ public class StudentRestController {
         
         StudentDto studentDto = studentService.updateStudent
             (id, theStudentDto);
+        
+        return ResponseEntity.ok(studentDto);
+    }
+
+
+    @PatchMapping ("{id}")
+    public ResponseEntity<StudentDto> patchStudent(@PathVariable Long id, 
+            @Valid @RequestBody StudentDto theStudentDto) {
+        
+        StudentDto studentDto = studentService.patchStudent(id, theStudentDto);
         
         return ResponseEntity.ok(studentDto);
     }
